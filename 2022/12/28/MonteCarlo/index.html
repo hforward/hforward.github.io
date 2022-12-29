@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="hforward&#39;s blog">
+  <link 
+    rel="icon" 
+    href="https://i.328888.xyz/2022/12/28/URBy5.jpeg">
+  <title>Markov Chain & Monte Carlo (MCMC)</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="Markov Chain &amp; Monte Carlo (MCMC)">
+    
+    
+      <meta 
+        property="og:url" 
+        content="https://hforward.github.io/2022/12/28/MonteCarlo/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://i.328888.xyz/2022/12/28/URBy5.jpeg">
+    
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2022-12-28">
+      <meta 
+        property="og:article:modified_time" 
+        content="2022-12-29">
+      <meta 
+        property="og:article:author" 
+        content="hfang">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="机器学习方法">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+    
+    <link rel="prefetch" href="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js" as="script">
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://i.328888.xyz/2022/12/28/URBy5.jpeg" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">hforward's blog</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://i.328888.xyz/2022/12/28/URBy5.jpeg" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">hfang</p>
+<p class="author-description">LAYMAN</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>2</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>0</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>1</span>
+    <span>标签</span>
+  </a>
+</div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" 
+        title="机器学习方法">
+        <div class="tags-list-item">机器学习方法</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Markov Chain &amp; Monte Carlo (MCMC)
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-12-28T08:03:14.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2022-12-28</span>
+    </time>
+    
+    
+      <span class="dot"></span>
+      <span>2.2k 字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" 
+            class="post-meta-link">
+            机器学习方法
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h1 id="Markov-Chain-amp-Monte-Carlo-MCMC"><a href="#Markov-Chain-amp-Monte-Carlo-MCMC" class="headerlink" title="Markov Chain &amp; Monte Carlo (MCMC)"></a>Markov Chain &amp; Monte Carlo (MCMC)</h1><h2 id="1-蒙特卡洛方法"><a href="#1-蒙特卡洛方法" class="headerlink" title="1. 蒙特卡洛方法"></a>1. 蒙特卡洛方法</h2><p>本文不介绍蒙特卡洛方法的背景，聚焦于方法本身以及应用。主要参考网络上各路大神的博客做的总结。</p>
+<h3 id="1-1-蒙特卡洛方法-Monte-Carlo-Method"><a href="#1-1-蒙特卡洛方法-Monte-Carlo-Method" class="headerlink" title="1.1 蒙特卡洛方法 Monte Carlo Method"></a>1.1 蒙特卡洛方法 Monte Carlo Method</h3><p>蒙特卡洛方法是一种基于采样的随机近似方法。通常用于求解复杂函数的定积分：</p>
+<p>$\theta &#x3D; \int_a^b f(x)dx$ </p>
+<p>在很多情况下，由于 $f(x)$ 的复杂性，我们很难之直接获得 $f(x)$ 的原函数的解析解形式，这导致我们无法直接通过公式将定积分求出。可以通过蒙特卡洛方法通过采样的方式对积分进行近似。如下图，曲线表示函数 $f(x)$ ，目标是要求取 $a,b$ 区间的阴影部分的面积。</p>
+<p>（1）假设 $[a,b]$ 中 $x$ 服从均匀分布 $p(x)$，即从 $[a,b]$ 中抽取任何一个值都是等概率的。</p>
+<p>（2）对 $[a,b]$ 间随机采样 $N$ 次得到一组样本 ${x_1, x_2, …, x_N}$，然后计算每个样本对应的函数值，即 ${f(x_1), f(x_2), …, f(x_N)}$。其中，每一组值对应一次对定积分的估计：</p>
+<p>$(b-a)f(x_n)$，</p>
+<p>可以看作是一个矩形的面积，但是每一次的估计可能低&#x2F;高估整体的积分值。所以可以通过对所有采样的估计积分值求均值来的得到定积分的近似求解：</p>
+<p>$\frac{1}{n}\sum_{i&#x3D;1}^{N}(b-a)f(x_i) &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{N}\frac{f(x_i)}{1&#x2F;(b-a)}&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^{N}\frac{f(x_i)}{p(x_i)}$, </p>
+<p>其中，$p(x_i)&#x3D;\frac{1}{b-a},i&#x3D;1…N$ 是当 $x&#x3D;x_i$ 时的概率密度函数值，即采样的概率值是相等的。</p>
+<p>（3）通过以上的近似，原始的定积分 $\theta &#x3D; \int_a^b f(x)dx$ 可以通过以下等式进行近似（假设分布为均匀分布）：</p>
+<p>$\theta &#x3D; \int_a^b f(x)dx&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^{N}\frac{f(x_i)}{1&#x2F;(b-a)}$</p>
+<p>（4）推导出一般形式：</p>
+<p>$\theta &#x3D; \int_a^b f(x)dx &#x3D;  \int_a^b \frac{f(x)}{p(x)}p(x)dx \approx \frac{1}{n}\sum_{i&#x3D;1}^{N}\frac{f(x_i)}{p(x_i)}$ </p>
+<p>如果 $p(x)$ 是一个复杂的分布，如果要通过以上方法来近似这个定积分，主要的问题就变为如何从 $p(x)$ 中采样得到一系列的样本 ${x_i}$。</p>
+<p>以上内容，主要为学习参考[1]中的笔记。</p>
+<p>回看这个等式：</p>
+<p>$\theta &#x3D; \int_a^b f(x)dx &#x3D; \frac{1}{n}\sum_{i&#x3D;1}^{N}\frac{f(x_i)}{p(x_i)}$</p>
+<p>个人看法：如果 $p(x)$ 不是均匀分布，则采样的概率是不同的。某些 $\hat{x}$ 的采样概率会比较高，$p(\hat{x})$ 的值比较大，则 $\frac{f(\hat{x})}{p(\hat{x})}$ 的值便较小。从加权平均的角度看，采样概率高的样本点会被赋予一个相对较小的权重，从而减少采样过于集中导致的估计偏差过大的影响。</p>
+<hr>
+<h2 id="2-从常见概率分布采样"><a href="#2-从常见概率分布采样" class="headerlink" title="2. 从常见概率分布采样"></a>2. 从常见概率分布采样</h2><p>常见的概率分布采样的样本可以通过从均匀分布（ $u_i \backsim Uniform(0,1)$ ）中采样并进行变换得到。</p>
+<p>采样的思想：通过从均匀分布中采样得到一个介于 $(0,1)$ 之间的值 $u$ 作为累积分布函数（Cumulative Distribution Function, CDF）值，该值对应的样本点即为采样的样本点 $x_i &#x3D; CDF^{-1}(u_i)$.</p>
+<p>（1）这种方法只适用于CDF有解析解形式的概率分布，当概率密度函数（Probability Density Distribution, PDF）很复杂时，无法得到CDF，也就无法进行采样。</p>
+<p>（2）从高维度概率分布中采样存在困难。</p>
+<hr>
+<h2 id="3-接受-拒绝采样"><a href="#3-接受-拒绝采样" class="headerlink" title="3. 接受-拒绝采样"></a>3. 接受-拒绝采样</h2><p>当待抽样的分布 $p(x)$ 比较复杂时，可以采用接受拒绝采样方法。步骤如下：</p>
+<p>（1）使用一个建议分布（Proposal Distribution）$g(x)$，并令 $k*g(x) \geq p(x)$ ，如图所示。建议分布可以选用一些常见的概率分布（e.g. 高斯分布）便于计算。</p>
+<p>（2）首先从概率分布 $k*g(x)$ 中采样。</p>
+<p>（3）令 $\alpha_i&#x3D;\frac{p(x_i)}{k*g(x_i)}$ 为接受概率。</p>
+<p>（4）从均匀分布中进行抽样得到：$u_i \backsim Uniform(0,1)$。</p>
+<p>（5）如果 $u_i \leq \alpha_i$，则接受该样本；否则拒绝。</p>
+<p><strong>问题：</strong> 对于复杂的概率分布 $p(x)$，$k$ 的大小很难确定，特别的对于高维的概率分布。</p>
+<hr>
+<h2 id="4-重要性采样"><a href="#4-重要性采样" class="headerlink" title="4. 重要性采样"></a>4. 重要性采样</h2><p>当无法直接从 $p(x)$ 中进行采样来计算 $E_{x \backsim p}[f(x)]$ 时，</p>
+<p>（1）首先使用一个自定义的概率分布 $q(x)$ 进行采样 $x_i$：</p>
+<p>$E_{x \backsim p}[f(x)] &#x3D; \int f(x)p(x)dx &#x3D; \int f(x)\frac{p(x)}{q(x)}q(x)dx &#x3D; E_{x \backsim q}[f(x)\frac{p(x)}{q(x)}]$</p>
+<p>（2）在 $q(x)$ 上采样得到 $N$ 个样本后得到 ${x_i},i&#x3D;1…N$，期望的估计值：</p>
+<p>$E_{x \backsim q}[f(x)\frac{p(x)}{q(x)}] \approx \frac{1}{N} \sum_{i&#x3D;1}^{N} f(x_i)\frac{p(x_i)}{q(x_i)}$</p>
+<p><strong>问题：</strong> 虽然 $E_{x \backsim p}[f(x)] &#x3D;E_{x \backsim q}[f(x)\frac{p(x)}{q(x)}] $，但如果$p(x)$ 和 $q(x)$ 的形态差距太大，则两者的方差差距过大。所以需要大量的采样才能保证结果的准确度。</p>
+<p>$Var_{x \backsim p}[f(x)]&#x3D;E_{x \backsim p}[f(x)^2] - (E_{x \backsim p}[f(x)])^2$</p>
+<p>$Var_{x \backsim q}[f(x)\frac{p(x)}{q(x)}]&#x3D;E_{x \backsim p}[f(x)^2\frac{p(x)}{q(x)}] - (E_{x \backsim p}[f(x)])^2$</p>
+<hr>
+<h2 id="5-Markov-Chain-马尔可夫链"><a href="#5-Markov-Chain-马尔可夫链" class="headerlink" title="5. Markov Chain 马尔可夫链"></a>5. Markov Chain 马尔可夫链</h2><h3 id="5-1-平稳分布"><a href="#5-1-平稳分布" class="headerlink" title="5.1 平稳分布"></a>5.1 平稳分布</h3><p><strong>马尔可夫链：</strong> 随机变量序列 ${x_1,x_2,…,x_{t},x_{t+1}…}$ 满足马尔可夫性或无后效性，即</p>
+<p>$p(x_{t+1}|x_1…x_t)&#x3D;p(x_{t+1}|x_t)$</p>
+<p><strong>状态转移矩阵：</strong> 定义矩阵 $P$ 第 $(i, j)$ 位置的元素为从 $i$ 状态转移到 $j$ 状态的概率。</p>
+<p>其中，马尔科夫链模型的状态转移矩阵收敛到的稳定概率分布与我们的初始状态概率分布无关。</p>
+<p>如果我们得到了这个稳定概率分布对应的马尔科夫链模型的状态转移矩阵 $P$，则我们可以用任意的概率分布 $\pi_{init}$ 开始，带入马尔科夫链模型的状态转移矩阵，这样经过一些序列的转换，最终就可以得到符合对应稳定概率分布 $\pi$。</p>
+<p>对于一个非周期的马尔科夫状态转移矩阵 $P$，并且它的任何两个状态是连通的，在经过 $n \geq threshold$ 次的迭代后，有：</p>
+<ol>
+<li>$lim_{n \rightarrow \infty}P_{ij}&#x3D;\pi(j)$，即每一行是相同的。</li>
+<li>$\pi P&#x3D;\pi$，其中 $\pi &#x3D; [\pi(1),\pi(2),…,\pi(j),…]$ 且 $\sum_{i&#x3D;1}^{\infty}\pi(i)&#x3D;1$，$P$ 中每行元素相加为1。</li>
+<li>$\pi$ 被称作平稳分布。</li>
+</ol>
+<p>假设到第 $n$ 步时，概率分布 $\pi_{n}(x)$ 收敛到平稳分布，则$n$ 步后的随机变量序列 ${x_n \backsim \pi(x),x_{n+1} \backsim \pi(x), x_{n+2} \backsim \pi(x),…}$，属于同分布随机变量，但并不独立。</p>
+<p>5.2 基于马尔可夫链进行采样</p>
+<p>初始任意简单概率分布 $\pi(x)$，当状态转移到 $n$ 次时，此时的采样集合 $(x_n, x_{n+1},…)$ 即是符合我们的平稳分布的对应样本集，后续可以应用于蒙特卡洛方法。</p>
+<p>采样步骤如下：</p>
+<p>（1）输入马尔科夫链状态转移矩阵 $P$，设定状态转移次数阈值 $n_1$，需要的样本个数 $n_2$；</p>
+<p>（2）从任意简单概率分布采样得到初始状态值为 $x_0 \backsim \pi(x)$</p>
+<p>（3）从 $t&#x3D;0$ 到 $t&#x3D;n_1+n_2-1$ 时刻，依次从条件概率分布 $P(x|x_t)$ 中采样得到样本 $x_{t+1}$；个人理解：此处的条件概率对应的应该是 $x_t$ 对应的状态在 $t+1$ 时刻转移到各状态的概率分布。</p>
+<p>（4）假设当状态转移到 $n$ 次时，此时的采样集合 $(x_n, x_{n+1},…)$ 即是符合我们的平稳分布的对应样本集。</p>
+<hr>
+<h2 id="6-MCMC采样方法"><a href="#6-MCMC采样方法" class="headerlink" title="6. MCMC采样方法"></a>6. MCMC采样方法</h2><h3 id="6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition"><a href="#6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition" class="headerlink" title="6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)"></a>6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</h3><p>细致平稳条件形式上表示为: $\pi(i)P(i,j)&#x3D;\pi(j)P(j,i)$，该条件为 $\pi P &#x3D; \pi$ 充分条件。证明如下：</p>
+<p>$\sum_{i&#x3D;1}^{\infty}\pi(i)P(i,j)&#x3D;\sum_{i&#x3D;1}^{\infty}\pi(j)P(j,i)&#x3D;\pi(j)\sum_{i&#x3D;1}^{\infty}P(j,i)&#x3D;\pi(j)$,</p>
+<p>上式即可表示为：$\pi P &#x3D; \pi$</p>
+<p>但仅仅从细致平稳条件还是很难找到合适的矩阵 $P$。在目标平稳分布是$\pi(x)$的情况下，随机找一个马尔科夫链状态转移矩阵 $Q$ 是很难满足:</p>
+<p>$\pi(i)Q(i,j)&#x3D;\pi(j)Q(j,i)$</p>
+<h3 id="6-2-MCMC采样"><a href="#6-2-MCMC采样" class="headerlink" title="6.2 MCMC采样"></a>6.2 MCMC采样</h3><hr>
+<h2 id="7-Metropolis-Hastings-采样方法"><a href="#7-Metropolis-Hastings-采样方法" class="headerlink" title="7. Metropolis-Hastings 采样方法"></a>7. Metropolis-Hastings 采样方法</h2><hr>
+<h2 id="吉布斯采样"><a href="#吉布斯采样" class="headerlink" title=". 吉布斯采样"></a>. 吉布斯采样</h2><hr>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6625739.html">https://www.cnblogs.com/pinard/p/6625739.html</a></p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE411o7qd?p=75&vd_source=7ca516548c68fb179b20866bc384bafe">https://www.bilibili.com/video/BV1aE411o7qd?p=75&amp;vd_source=7ca516548c68fb179b20866bc384bafe</a></p>
+
+  </div>
+  <div>
+    
+      <div 
+        class="post-note note-warning copyright" 
+        style="margin-top: 42px">
+        <p>
+          <span style="font-weight: bold;">作者：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="/about">
+            hfang
+          </a>
+        </p>
+        <p>
+          <span style="font-weight: bold;">文章链接：</span><a 
+            target="_blank" 
+            rel="nofollow noopener noreferrer" 
+            href="https://hforward.github.io/2022/12/28/MonteCarlo/">
+            https://hforward.github.io/2022/12/28/MonteCarlo/
+          </a>
+        </p>
+        <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
+      </div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2022/12/27/hello-world/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">Welcome to hforward&#39;s blog </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+</div>
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-12-28</div>
+        <a href="/2022/12/28/MonteCarlo/"><div class="recent-posts-item-content">Markov Chain &amp; Monte Carlo (MCMC)</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-12-27</div>
+        <a href="/2022/12/27/hello-world/"><div class="recent-posts-item-content">Welcome to hforward&#39;s blog</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2022
+          
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          hforward's blog
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+      
+
+  
+  
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      };
+    </script>
+    
+<script src="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js"></script>
+
+  
+ 
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>
