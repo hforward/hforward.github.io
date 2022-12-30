@@ -45,7 +45,7 @@
         content="2022-12-28">
       <meta 
         property="og:article:modified_time" 
-        content="2022-12-29">
+        content="2022-12-30">
       <meta 
         property="og:article:author" 
         content="hfang">
@@ -325,7 +325,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1. 蒙特卡洛方法 (Monte Carlo Method)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1.1 蒙特卡洛方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7-Acceptance-Rejection-Sampling"><span class="toc-text">3. 接受-拒绝采样 (Acceptance-Rejection Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7-Importance-Sampling"><span class="toc-text">4. 重要性采样 (Importance Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE-Markov-Chain"><span class="toc-text">5. 马尔可夫链 (Markov Chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件 (Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7%E7%90%86%E8%AE%BA"><span class="toc-text">6.2 MCMC采样理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6.3 Metropolis-Hastings 采样方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="toc-text">7. 吉布斯采样 (Gibbs Sampling)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E4%BA%8C%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2"><span class="toc-text">7.1 二维联合概率分布 $\pi(x_1,x_2)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%A4%9A%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2-%E2%80%A6-x-p"><span class="toc-text">7.2 多维联合概率分布 $\pi(x_1,x_2,…,x_p)$</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
       </div>
     </article>
   
@@ -386,7 +386,7 @@
     
     
       <span class="dot"></span>
-      <span>2.2k 字</span>
+      <span>3.7k 字</span>
     
   </div>
   
@@ -413,8 +413,8 @@
   <div 
     id="section" 
     class="post-content">
-    <h1 id="Markov-Chain-amp-Monte-Carlo-MCMC"><a href="#Markov-Chain-amp-Monte-Carlo-MCMC" class="headerlink" title="Markov Chain &amp; Monte Carlo (MCMC)"></a>Markov Chain &amp; Monte Carlo (MCMC)</h1><h2 id="1-蒙特卡洛方法"><a href="#1-蒙特卡洛方法" class="headerlink" title="1. 蒙特卡洛方法"></a>1. 蒙特卡洛方法</h2><p>本文不介绍蒙特卡洛方法的背景，聚焦于方法本身以及应用。主要参考网络上各路大神的博客做的总结。</p>
-<h3 id="1-1-蒙特卡洛方法-Monte-Carlo-Method"><a href="#1-1-蒙特卡洛方法-Monte-Carlo-Method" class="headerlink" title="1.1 蒙特卡洛方法 Monte Carlo Method"></a>1.1 蒙特卡洛方法 Monte Carlo Method</h3><p>蒙特卡洛方法是一种基于采样的随机近似方法。通常用于求解复杂函数的定积分：</p>
+    <h1 id="Markov-Chain-amp-Monte-Carlo-MCMC"><a href="#Markov-Chain-amp-Monte-Carlo-MCMC" class="headerlink" title="Markov Chain &amp; Monte Carlo (MCMC)"></a>Markov Chain &amp; Monte Carlo (MCMC)</h1><h2 id="1-蒙特卡洛方法-Monte-Carlo-Method"><a href="#1-蒙特卡洛方法-Monte-Carlo-Method" class="headerlink" title="1. 蒙特卡洛方法 (Monte Carlo Method)"></a>1. 蒙特卡洛方法 (Monte Carlo Method)</h2><p>本文不介绍蒙特卡洛方法的背景，聚焦于方法本身以及应用。主要参考网络上各路大神的博客做的总结。</p>
+<h3 id="1-1-蒙特卡洛方法"><a href="#1-1-蒙特卡洛方法" class="headerlink" title="1.1 蒙特卡洛方法"></a>1.1 蒙特卡洛方法</h3><p>蒙特卡洛方法是一种基于采样的随机近似方法。通常用于求解复杂函数的定积分：</p>
 <p>$\theta &#x3D; \int_a^b f(x)dx$ </p>
 <p>在很多情况下，由于 $f(x)$ 的复杂性，我们很难之直接获得 $f(x)$ 的原函数的解析解形式，这导致我们无法直接通过公式将定积分求出。可以通过蒙特卡洛方法通过采样的方式对积分进行近似。如下图，曲线表示函数 $f(x)$ ，目标是要求取 $a,b$ 区间的阴影部分的面积。</p>
 <p>（1）假设 $[a,b]$ 中 $x$ 服从均匀分布 $p(x)$，即从 $[a,b]$ 中抽取任何一个值都是等概率的。</p>
@@ -438,7 +438,7 @@
 <p>（1）这种方法只适用于CDF有解析解形式的概率分布，当概率密度函数（Probability Density Distribution, PDF）很复杂时，无法得到CDF，也就无法进行采样。</p>
 <p>（2）从高维度概率分布中采样存在困难。</p>
 <hr>
-<h2 id="3-接受-拒绝采样"><a href="#3-接受-拒绝采样" class="headerlink" title="3. 接受-拒绝采样"></a>3. 接受-拒绝采样</h2><p>当待抽样的分布 $p(x)$ 比较复杂时，可以采用接受拒绝采样方法。步骤如下：</p>
+<h2 id="3-接受-拒绝采样-Acceptance-Rejection-Sampling"><a href="#3-接受-拒绝采样-Acceptance-Rejection-Sampling" class="headerlink" title="3. 接受-拒绝采样 (Acceptance-Rejection Sampling)"></a>3. 接受-拒绝采样 (Acceptance-Rejection Sampling)</h2><p>当待抽样的分布 $p(x)$ 比较复杂时，可以采用接受拒绝采样方法。步骤如下：</p>
 <p>（1）使用一个建议分布（Proposal Distribution）$g(x)$，并令 $k*g(x) \geq p(x)$ ，如图所示。建议分布可以选用一些常见的概率分布（e.g. 高斯分布）便于计算。</p>
 <p>（2）首先从概率分布 $k*g(x)$ 中采样。</p>
 <p>（3）令 $\alpha_i&#x3D;\frac{p(x_i)}{k*g(x_i)}$ 为接受概率。</p>
@@ -446,7 +446,7 @@
 <p>（5）如果 $u_i \leq \alpha_i$，则接受该样本；否则拒绝。</p>
 <p><strong>问题：</strong> 对于复杂的概率分布 $p(x)$，$k$ 的大小很难确定，特别的对于高维的概率分布。</p>
 <hr>
-<h2 id="4-重要性采样"><a href="#4-重要性采样" class="headerlink" title="4. 重要性采样"></a>4. 重要性采样</h2><p>当无法直接从 $p(x)$ 中进行采样来计算 $E_{x \backsim p}[f(x)]$ 时，</p>
+<h2 id="4-重要性采样-Importance-Sampling"><a href="#4-重要性采样-Importance-Sampling" class="headerlink" title="4. 重要性采样 (Importance Sampling)"></a>4. 重要性采样 (Importance Sampling)</h2><p>当无法直接从 $p(x)$ 中进行采样来计算 $E_{x \backsim p}[f(x)]$ 时，</p>
 <p>（1）首先使用一个自定义的概率分布 $q(x)$ 进行采样 $x_i$：</p>
 <p>$E_{x \backsim p}[f(x)] &#x3D; \int f(x)p(x)dx &#x3D; \int f(x)\frac{p(x)}{q(x)}q(x)dx &#x3D; E_{x \backsim q}[f(x)\frac{p(x)}{q(x)}]$</p>
 <p>（2）在 $q(x)$ 上采样得到 $N$ 个样本后得到 ${x_i},i&#x3D;1…N$，期望的估计值：</p>
@@ -455,7 +455,7 @@
 <p>$Var_{x \backsim p}[f(x)]&#x3D;E_{x \backsim p}[f(x)^2] - (E_{x \backsim p}[f(x)])^2$</p>
 <p>$Var_{x \backsim q}[f(x)\frac{p(x)}{q(x)}]&#x3D;E_{x \backsim p}[f(x)^2\frac{p(x)}{q(x)}] - (E_{x \backsim p}[f(x)])^2$</p>
 <hr>
-<h2 id="5-Markov-Chain-马尔可夫链"><a href="#5-Markov-Chain-马尔可夫链" class="headerlink" title="5. Markov Chain 马尔可夫链"></a>5. Markov Chain 马尔可夫链</h2><h3 id="5-1-平稳分布"><a href="#5-1-平稳分布" class="headerlink" title="5.1 平稳分布"></a>5.1 平稳分布</h3><p><strong>马尔可夫链：</strong> 随机变量序列 ${x_1,x_2,…,x_{t},x_{t+1}…}$ 满足马尔可夫性或无后效性，即</p>
+<h2 id="5-马尔可夫链-Markov-Chain"><a href="#5-马尔可夫链-Markov-Chain" class="headerlink" title="5. 马尔可夫链 (Markov Chain)"></a>5. 马尔可夫链 (Markov Chain)</h2><h3 id="5-1-平稳分布"><a href="#5-1-平稳分布" class="headerlink" title="5.1 平稳分布"></a>5.1 平稳分布</h3><p><strong>马尔可夫链：</strong> 随机变量序列 ${x_1,x_2,…,x_t,x_{t+1}…}$ 满足马尔可夫性或无后效性，即</p>
 <p>$p(x_{t+1}|x_1…x_t)&#x3D;p(x_{t+1}|x_t)$</p>
 <p><strong>状态转移矩阵：</strong> 定义矩阵 $P$ 第 $(i, j)$ 位置的元素为从 $i$ 状态转移到 $j$ 状态的概率。</p>
 <p>其中，马尔科夫链模型的状态转移矩阵收敛到的稳定概率分布与我们的初始状态概率分布无关。</p>
@@ -475,16 +475,67 @@
 <p>（3）从 $t&#x3D;0$ 到 $t&#x3D;n_1+n_2-1$ 时刻，依次从条件概率分布 $P(x|x_t)$ 中采样得到样本 $x_{t+1}$；个人理解：此处的条件概率对应的应该是 $x_t$ 对应的状态在 $t+1$ 时刻转移到各状态的概率分布。</p>
 <p>（4）假设当状态转移到 $n$ 次时，此时的采样集合 $(x_n, x_{n+1},…)$ 即是符合我们的平稳分布的对应样本集。</p>
 <hr>
-<h2 id="6-MCMC采样方法"><a href="#6-MCMC采样方法" class="headerlink" title="6. MCMC采样方法"></a>6. MCMC采样方法</h2><h3 id="6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition"><a href="#6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition" class="headerlink" title="6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)"></a>6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</h3><p>细致平稳条件形式上表示为: $\pi(i)P(i,j)&#x3D;\pi(j)P(j,i)$，该条件为 $\pi P &#x3D; \pi$ 充分条件。证明如下：</p>
+<h2 id="6-MCMC采样方法"><a href="#6-MCMC采样方法" class="headerlink" title="6. MCMC采样方法"></a>6. MCMC采样方法</h2><h3 id="6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition"><a href="#6-1-马尔科夫链的细致平稳条件-Detailed-Balance-Condition" class="headerlink" title="6.1 马尔科夫链的细致平稳条件 (Detailed Balance Condition)"></a>6.1 马尔科夫链的细致平稳条件 (Detailed Balance Condition)</h3><p>细致平稳条件形式上表示为: $\pi(i)P(i,j)&#x3D;\pi(j)P(j,i)$，该条件为 $\pi P &#x3D; \pi$ 充分条件。证明如下：</p>
 <p>$\sum_{i&#x3D;1}^{\infty}\pi(i)P(i,j)&#x3D;\sum_{i&#x3D;1}^{\infty}\pi(j)P(j,i)&#x3D;\pi(j)\sum_{i&#x3D;1}^{\infty}P(j,i)&#x3D;\pi(j)$,</p>
 <p>上式即可表示为：$\pi P &#x3D; \pi$</p>
-<p>但仅仅从细致平稳条件还是很难找到合适的矩阵 $P$。在目标平稳分布是$\pi(x)$的情况下，随机找一个马尔科夫链状态转移矩阵 $Q$ 是很难满足:</p>
+<p>但仅仅从细致平稳条件还是很难找到合适的矩阵 $P$。在目标平稳分布是 $\pi(x)$ 的情况下，随机找一个马尔科夫链状态转移矩阵 $Q$ 是很难满足:</p>
 <p>$\pi(i)Q(i,j)&#x3D;\pi(j)Q(j,i)$</p>
-<h3 id="6-2-MCMC采样"><a href="#6-2-MCMC采样" class="headerlink" title="6.2 MCMC采样"></a>6.2 MCMC采样</h3><hr>
-<h2 id="7-Metropolis-Hastings-采样方法"><a href="#7-Metropolis-Hastings-采样方法" class="headerlink" title="7. Metropolis-Hastings 采样方法"></a>7. Metropolis-Hastings 采样方法</h2><hr>
-<h2 id="吉布斯采样"><a href="#吉布斯采样" class="headerlink" title=". 吉布斯采样"></a>. 吉布斯采样</h2><hr>
+<h3 id="6-2-MCMC采样理论"><a href="#6-2-MCMC采样理论" class="headerlink" title="6.2 MCMC采样理论"></a>6.2 MCMC采样理论</h3><p>由于条件 $\pi(i)Q(i,j)&#x3D;\pi(j)Q(j,i)$ 很难满足，于是引入 $\alpha(i, j)$ 来平衡等式的两边：$\pi(i)Q(i,j)\alpha(i,j)&#x3D;\pi(j)Q(j,i)\alpha(j,i)$。</p>
+<p>其中: $\alpha(i,j)&#x3D;\pi(j)Q(j,i)$, $\alpha(j,i)&#x3D;\pi(i)Q(i,j)$。</p>
+<p>$\alpha(i, j)$ 一般被称作接受率，即目标矩阵 $P$ 可以通过任意一个马尔科夫链状态转移矩阵 $Q$ 以一定的接受率获得。但是这又带来一个问题，如何寻找合适的 $\alpha$，在<a href="#63-metropolis-hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95">M-H算法中介绍</a>。</p>
+<p>MCMC的理论采样步骤如下：</p>
+<p>（1）输入马尔科夫链状态转移矩阵 $P$，设定状态转移次数阈值 $n_1$，需要的样本个数 $n_2$；</p>
+<p>（2）从任意简单概率分布采样得到初始状态值为 $x_0 \backsim \pi(x)$</p>
+<p>（3）从 $t&#x3D;0$ 到 $t&#x3D;n_1+n_2-1$ 时刻，依次从：</p>
+<ol>
+<li><p>条件概率分布 $Q(x|x_t)$ 中采样得到样本 $x_*$。</p>
+</li>
+<li><p>从均匀分布中进行抽样得到：$u \backsim Uniform(0,1)$。</p>
+</li>
+<li><p>如果 $ u $ &lt; $ \alpha(x_t,x_*)&#x3D;\pi(x_*)Q(x_*,x_t)$，则接受转移从 $x_t \rightarrow x_*$，即 $x_{t+1} &#x3D; x_*$。</p>
+</li>
+<li><p>否则不接受转移，即 $x_{t+1} &#x3D; x_t$。</p>
+</li>
+</ol>
+<p>（4）最终在进行 $n_1$ 次转移后，开始从平稳分布采样得到的样本集 ${x_{n_1},x_{n_1+1},…,x_{n_1+n_2-1}}$ 为所求。</p>
+<p><strong>问题：</strong> 当接受率 $\alpha(x_t,x_*)$ 非常小时，导致大部分的采样值都被拒绝转移，在采样了上百万次马尔可夫链后还没有收敛，采样效率很低。</p>
+<h3 id="6-3-Metropolis-Hastings-采样方法"><a href="#6-3-Metropolis-Hastings-采样方法" class="headerlink" title="6.3 Metropolis-Hastings 采样方法"></a>6.3 Metropolis-Hastings 采样方法</h3><p>在使用马尔可夫链进行采样时，只要满足细致平稳条件 $\pi P &#x3D; \pi$，此时的采样集合 $(x_n, x_{n+1},…)$ 即是符合要求样本集。</p>
+<p><strong>之前存在的问题：</strong> 其中的状态转移矩阵 $P$ 的获取是十分困难的，于是在MCMC采样理论中引入了 $Q$ 矩阵来作为替代。但是，任意的 $Q$ 很难使得马尔可夫链收敛。为了满足细致平稳条件，引入了状态转移接受概率 $\alpha(x_t,x_*)$，表示 $Q(x_*,x_t)$ 矩阵的状态转移的接受概率。当 $\alpha(x_t,x_*)$ 的值过小时，导致大部分的采样值都被拒绝转移，马尔可夫链后很难收敛。</p>
+<p>为了解决这个问题，令 $\alpha(x_t,x_*) &#x3D; min (\frac{\pi(x_*)Q(x_t|x_*)}{\pi(x_t)Q(x_*|x_t)},1) $，抽样的步骤和 <a href="#62-mcmc%E9%87%87%E6%A0%B7%E7%90%86%E8%AE%BA">MCMC采样理论</a>中的步骤没有区别。M-H采样完整解决了使用蒙特卡洛方法需要的任意概率分布样本集的问题。</p>
+<p><strong>M-H算法存在的问题：</strong> （1）在高维时需要的计算时间长，算法效率很低；（2）很难求出目标的各特征维度联合分布。</p>
+<hr>
+<h2 id="7-吉布斯采样-Gibbs-Sampling"><a href="#7-吉布斯采样-Gibbs-Sampling" class="headerlink" title="7. 吉布斯采样 (Gibbs Sampling)"></a>7. 吉布斯采样 (Gibbs Sampling)</h2><p>吉布斯采样的思想是对多维联合概率分布的随机变量一次一个随机变量进行采样，最终得到下一个采样的样本并进行状态转移。</p>
+<h3 id="7-1-二维联合概率分布-pi-x-1-x-2"><a href="#7-1-二维联合概率分布-pi-x-1-x-2" class="headerlink" title="7.1 二维联合概率分布 $\pi(x_1,x_2)$"></a>7.1 二维联合概率分布 $\pi(x_1,x_2)$</h3><p>假设有一个点 $A(x_1^1, x_2^1)$，在 $x_1^1$不变的情况在，在 $x_2$ 的方向上进行采样得到点 $B(x_1^1, x_2^2)$。由此可以得到：</p>
+<p>$\pi(A) &#x3D; \pi(x_1^1, x_2^1) &#x3D; \pi(x_1^1)\pi(x_2^1|x_1^1)$ </p>
+<p>$\pi(B) &#x3D; \pi(x_1^1, x_2^2) &#x3D; \pi(x_1^1)\pi(x_2^2|x_1^1)$ </p>
+<p>上两式可以转换为：</p>
+<p>$\pi(A)\pi(x_2^2|x_1^1) &#x3D; \pi(x_1^1, x_2^1)\pi(x_2^2|x_1^1)  &#x3D; \pi(x_1^1)\pi(x_2^1|x_1^1)\pi(x_2^2|x_1^1)$ </p>
+<p>$\pi(B)\pi(x_2^1|x_1^1) &#x3D; \pi(x_1^1, x_2^2)\pi(x_2^1|x_1^1) &#x3D; \pi(x_1^1)\pi(x_2^2|x_1^1)\pi(x_2^1|x_1^1)$ </p>
+<p>则：</p>
+<p>$\pi(A)\pi(x_2^2|x_1^1) &#x3D; \pi(B)\pi(x_2^1|x_1^1)$。 </p>
+<p>可以解释为在 $x_1$ 轴上:</p>
+<p>$\pi(x_1^1, x_2^1)\pi(x_2^1 \rightarrow x_2^2|x_1^1) &#x3D; \pi(x_1^1, x_2^2)\pi(x_2^2 \rightarrow x_2^1|x_1^1)$</p>
+<p>对比上式与细致平稳分布条件 $\pi(i)P(i,j)&#x3D;\pi(j)P(j,i)$。可以看出 $\pi(x_2^1 \rightarrow x_2^2|x_1^1) &#x3D;  P(x_2^1,x_2^2|x_1^1)$, 即 $P(A \rightarrow B) $。所以可以构造分布 $\pi(x_1, x_2)$ 的马尔可夫链对应的状态转移矩阵 $P$：</p>
+<p>$P(A \rightarrow E) &#x3D; \pi(x_j^E|x_i^A)$ $if$ $x_i^E&#x3D;x_i^A$，$else$ $P(A \rightarrow E) &#x3D; 0$。</p>
+<p>通过以上的状态转移矩阵 $P$，可以得到任意两点 $A,A’$ 满足细致平稳分布条件：</p>
+<p>$\pi(A)\pi(A \rightarrow A’) &#x3D; \pi(A’)\pi(A’ \rightarrow A)$。 </p>
+<p>接下来，将二维的情况推广到多维情况下，总结Gibbs采样的步骤。</p>
+<h3 id="7-2-多维联合概率分布-pi-x-1-x-2-…-x-p"><a href="#7-2-多维联合概率分布-pi-x-1-x-2-…-x-p" class="headerlink" title="7.2 多维联合概率分布 $\pi(x_1,x_2,…,x_p)$"></a>7.2 多维联合概率分布 $\pi(x_1,x_2,…,x_p)$</h3><p>Gibbs采样的步骤如下，其中多维联合概率分布为 $\pi(x_1,x_2,…,x_p)$ ，马尔科夫链的状态转移概率为 $P(x_i|x_{-i})$ ：</p>
+<p>（1）随机初始化初始状态值 $\pi(x_1^0,x_2^0,…,x_p^0)$。</p>
+<p>（2）从 $t&#x3D;0$ 到 $t&#x3D;n_1+n_2-1$ 时刻，依次：</p>
+<ol>
+<li>从条件概率分布 $P(x_1|x_{-1})$中采样得到 $x_1^{t+1}$</li>
+<li>从条件概率分布 $P(x_2|x_{-2})$中采样得到 $x_2^{t+1}$ ……</li>
+<li>从条件概率分布 $P(x_p|x_{-p})$中采样得到 $x_p^{t+1}$</li>
+</ol>
+<p>（3）最终在进行 $n_1$ 次转移后，开始从平稳分布采样得到的样本集 ${(x_1^{n_1},x_2^{n_1},…,x_p^{n_1}),……,(x_1^{n_1+n_2-1},x_2^{n_1+n_2-1},…,x_p^{n_1+n_2-1})}$ 为所求。</p>
+<p>在M-H采样方法中，采样的得到的样本在 $\alpha(x_t,x_*) &#x3D; min{\frac{\pi(x_*)Q(x_t|x_*)}{\pi(x_t)Q(x_*|x_t)},1}$ 概率下接受。</p>
+<p>在Gibbs采样中：$ \pi(x_*) \rightarrow \pi(x_i^*|x_{-i}^*)\pi(x_{-i}^*) $ 、$ Q(x_t|x_*) \rightarrow \pi(x_i|x_{-i}^*) $，则</p>
+<p> $\alpha(x_t,x_*) &#x3D; \frac{\pi(x_i^*|x_{-i}^*)\pi(x_{-i}^*)\pi(x_i|x_{-i}^*)}{\pi(x_i|x_{-i})\pi(x_{-i})\pi(x_i^*|x_{-i})}$ ，其中每次进行采样的时候 $x_{-i}$ 和 $x_{-i}^*$ 其实是固定不变的，所以最终得到的  $\alpha(x_t,x_*) &#x3D; 1$ 。换句话说，Gibbs采样是一种特殊的M-H采样方法，其接受率为 100%。</p>
+<hr>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p>[1] <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6625739.html">https://www.cnblogs.com/pinard/p/6625739.html</a></p>
 <p>[2] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE411o7qd?p=75&vd_source=7ca516548c68fb179b20866bc384bafe">https://www.bilibili.com/video/BV1aE411o7qd?p=75&amp;vd_source=7ca516548c68fb179b20866bc384bafe</a></p>
+<p>[3] <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV17D4y1o7J2?p=1&vd_source=7ca516548c68fb179b20866bc384bafe">https://www.bilibili.com/video/BV17D4y1o7J2?p=1&amp;vd_source=7ca516548c68fb179b20866bc384bafe</a></p>
 
   </div>
   <div>
@@ -541,7 +592,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1. 蒙特卡洛方法 (Monte Carlo Method)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1.1 蒙特卡洛方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7-Acceptance-Rejection-Sampling"><span class="toc-text">3. 接受-拒绝采样 (Acceptance-Rejection Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7-Importance-Sampling"><span class="toc-text">4. 重要性采样 (Importance Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE-Markov-Chain"><span class="toc-text">5. 马尔可夫链 (Markov Chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件 (Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7%E7%90%86%E8%AE%BA"><span class="toc-text">6.2 MCMC采样理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6.3 Metropolis-Hastings 采样方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="toc-text">7. 吉布斯采样 (Gibbs Sampling)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E4%BA%8C%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2"><span class="toc-text">7.1 二维联合概率分布 $\pi(x_1,x_2)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%A4%9A%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2-%E2%80%A6-x-p"><span class="toc-text">7.2 多维联合概率分布 $\pi(x_1,x_2,…,x_p)$</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
 </div>
             </main>
             <aside class="right-column">
@@ -555,7 +606,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1. 蒙特卡洛方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1.1 蒙特卡洛方法 Monte Carlo Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7"><span class="toc-text">3. 接受-拒绝采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7"><span class="toc-text">4. 重要性采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Markov-Chain-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE"><span class="toc-text">5. Markov Chain 马尔可夫链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件(Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7"><span class="toc-text">6.2 MCMC采样</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">7. Metropolis-Hastings 采样方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-text">. 吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markov-Chain-amp-Monte-Carlo-MCMC"><span class="toc-text">Markov Chain &amp; Monte Carlo (MCMC)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95-Monte-Carlo-Method"><span class="toc-text">1. 蒙特卡洛方法 (Monte Carlo Method)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-text">1.1 蒙特卡洛方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BB%8E%E5%B8%B8%E8%A7%81%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E9%87%87%E6%A0%B7"><span class="toc-text">2. 从常见概率分布采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8E%A5%E5%8F%97-%E6%8B%92%E7%BB%9D%E9%87%87%E6%A0%B7-Acceptance-Rejection-Sampling"><span class="toc-text">3. 接受-拒绝采样 (Acceptance-Rejection Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%87%8D%E8%A6%81%E6%80%A7%E9%87%87%E6%A0%B7-Importance-Sampling"><span class="toc-text">4. 重要性采样 (Importance Sampling)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE-Markov-Chain"><span class="toc-text">5. 马尔可夫链 (Markov Chain)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E5%B9%B3%E7%A8%B3%E5%88%86%E5%B8%83"><span class="toc-text">5.1 平稳分布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCMC%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6. MCMC采样方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E7%9A%84%E7%BB%86%E8%87%B4%E5%B9%B3%E7%A8%B3%E6%9D%A1%E4%BB%B6-Detailed-Balance-Condition"><span class="toc-text">6.1 马尔科夫链的细致平稳条件 (Detailed Balance Condition)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-MCMC%E9%87%87%E6%A0%B7%E7%90%86%E8%AE%BA"><span class="toc-text">6.2 MCMC采样理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Metropolis-Hastings-%E9%87%87%E6%A0%B7%E6%96%B9%E6%B3%95"><span class="toc-text">6.3 Metropolis-Hastings 采样方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7-Gibbs-Sampling"><span class="toc-text">7. 吉布斯采样 (Gibbs Sampling)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E4%BA%8C%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2"><span class="toc-text">7.1 二维联合概率分布 $\pi(x_1,x_2)$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%A4%9A%E7%BB%B4%E8%81%94%E5%90%88%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83-pi-x-1-x-2-%E2%80%A6-x-p"><span class="toc-text">7.2 多维联合概率分布 $\pi(x_1,x_2,…,x_p)$</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
     </article>
   
   
