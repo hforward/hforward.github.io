@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://i.328888.xyz/2022/12/28/URBy5.jpeg">
-  <title>Hidden Markov Model (HMM)</title>
+  <title>二维几何变换</title>
   
     
       <meta 
         property="og:title" 
-        content="Hidden Markov Model (HMM)">
+        content="二维几何变换">
     
     
       <meta 
         property="og:url" 
-        content="https://hforward.github.io/2022/12/30/HiddenMarkovModel/index.html">
+        content="https://hforward.github.io/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/index.html">
     
     
       <meta 
@@ -42,18 +42,14 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2022-12-30">
+        content="2023-04-07">
       <meta 
         property="og:article:modified_time" 
-        content="2022-12-30">
+        content="2023-04-07">
       <meta 
         property="og:article:author" 
         content="hfang">
       
-        
-          <meta 
-            property="og:article:tag" 
-            content="机器学习方法">
         
       
     
@@ -325,7 +321,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
+
       </div>
     </article>
   
@@ -372,57 +368,29 @@
 <article class="card card-content">
   <header>
     <h1 class="post-title">
-      Hidden Markov Model (HMM)
+      二维几何变换
     </h1>
   </header>
   <div class="post-meta post-show-meta">
-    <time datetime="2022-12-30T11:46:38.000Z">
+    <time datetime="2023-04-07T10:24:21.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2022-12-30</span>
+      <span>2023-04-07</span>
     </time>
     
     
       <span class="dot"></span>
-      <span>114 字</span>
+      <span>16 字</span>
     
   </div>
-  
-    <div 
-      class="post-meta post-show-meta" 
-      style="margin-top: -10px;">
-      <div style="display: flex; align-items: center;">
-        <i 
-          class="iconfont icon-biaoqian" 
-          style="margin-right: 2px; font-size: 1.15rem;">
-        </i>
-        
-          
-          <a 
-            href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" 
-            class="post-meta-link">
-            机器学习方法
-          </a>
-        
-      </div>
-    </div>
   
   </header>
   <div 
     id="section" 
     class="post-content">
-    <h1 id="Hidden-Markov-Model-HMM"><a href="#Hidden-Markov-Model-HMM" class="headerlink" title="Hidden Markov Model (HMM)"></a>Hidden Markov Model (HMM)</h1><h2 id="0-背景"><a href="#0-背景" class="headerlink" title="0. 背景"></a>0. 背景</h2><p>隐变量服从一个离散的概率分布。<br>可以看做一个动态模型（Dynamic Model）&#x3D; 概率图 + 时间。<br>HMM &#x3D; 马尔可夫链 + 一般随机过程</p>
-<h2 id="1-符号定义"><a href="#1-符号定义" class="headerlink" title="1. 符号定义"></a>1. 符号定义</h2><ol>
-<li>模型 $\lambda&#x3D;(\pi,A,B)$：<ul>
-<li>$\pi$ 为初始概率分布</li>
-<li>$A$ 状态转移矩阵</li>
-<li>$B$ 观测状态生成矩阵</li>
-</ul>
-</li>
-<li>状态序列 $I&#x3D;{ i_1, i_2,…, i_T}$, 其中每个状态的取值集合为 $Q&#x3D;{q_1, q_2, …, q_N}$</li>
-</ol>
+    <p>本节将记录二维几何变换的相关问题。</p>
 
   </div>
   <div>
@@ -442,8 +410,8 @@
           <span style="font-weight: bold;">文章链接：</span><a 
             target="_blank" 
             rel="nofollow noopener noreferrer" 
-            href="https://hforward.github.io/2022/12/30/HiddenMarkovModel/">
-            https://hforward.github.io/2022/12/30/HiddenMarkovModel/
+            href="https://hforward.github.io/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/">
+            https://hforward.github.io/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/
           </a>
         </p>
         <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
@@ -453,29 +421,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">二维几何变换 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/2022/12/28/MonteCarlo/" 
+        href="/2022/12/30/HiddenMarkovModel/" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">Markov Chain &amp; Monte Carlo (MCMC) </div>
+            <div class="nav-title">Hidden Markov Model (HMM) </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -493,7 +447,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
+
 </div>
             </main>
             <aside class="right-column">
@@ -507,7 +461,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
+
     </article>
   
   

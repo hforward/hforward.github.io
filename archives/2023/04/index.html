@@ -18,17 +18,17 @@
   <link 
     rel="icon" 
     href="https://i.328888.xyz/2022/12/28/URBy5.jpeg">
-  <title>Hidden Markov Model (HMM)</title>
+  <title>归档</title>
   
     
       <meta 
         property="og:title" 
-        content="Hidden Markov Model (HMM)">
+        content="归档">
     
     
       <meta 
         property="og:url" 
-        content="https://hforward.github.io/2022/12/30/HiddenMarkovModel/index.html">
+        content="https://hforward.github.io/archives/2023/04/index.html">
     
     
       <meta 
@@ -36,26 +36,6 @@
         content="https://i.328888.xyz/2022/12/28/URBy5.jpeg">
     
     
-    
-      <meta 
-        property="og:type" 
-        content="article">
-      <meta 
-        property="og:article:published_time" 
-        content="2022-12-30">
-      <meta 
-        property="og:article:modified_time" 
-        content="2022-12-30">
-      <meta 
-        property="og:article:author" 
-        content="hfang">
-      
-        
-          <meta 
-            property="og:article:tag" 
-            content="机器学习方法">
-        
-      
     
   
   
@@ -72,8 +52,6 @@
   <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
   
   
-  
-    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
   
   <script>
     function loadScript(url, cb) {
@@ -317,18 +295,6 @@
                <div class="sticky-tablet">
   
   
-    <article class="display-when-two-columns spacer">
-      <div class="card card-content toc-card">
-        <div class="toc-header">
-  <i 
-    class="iconfont icon-menu" 
-    style="padding-right: 2px;">
-  </i>目录
-</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
-      </div>
-    </article>
-  
   
   <article class="card card-content categories-widget">
     <div class="categories-card">
@@ -365,150 +331,92 @@
   </article>
   
   
+    <article class="card card-content widescreen-archive archive-widget">
+      <div class="archive-card">
+  <div class="archive-card-header">
+    <i 
+      class="iconfont icon-wodebaobiao" 
+      style="padding-right: 2px;">
+    </i>归档
+  </div>
+  <div class="archive-card-list">
+    
+    
+    
+      
+        
+        
+        
+      
+    
+      
+        
+          <a 
+            href="/archives/2023" 
+            class="archive-card-list-item">
+            2023
+            <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    
+      <a 
+        href="/archives/2022" 
+        class="archive-card-list-item">
+        2022
+        <span class="archive-card-list-item-badge">3</span>
+      </a>
+    
+  </div>
+</div>
+    </article>
+  
 </div>
             </aside>
             <main class="main-column">
               
-<article class="card card-content">
-  <header>
-    <h1 class="post-title">
-      Hidden Markov Model (HMM)
-    </h1>
-  </header>
-  <div class="post-meta post-show-meta">
-    <time datetime="2022-12-30T11:46:38.000Z">
-      <i 
-        class="iconfont icon-calendar" 
-        style="margin-right: 2px;">
-      </i>
-      <span>2022-12-30</span>
-    </time>
-    
-    
-      <span class="dot"></span>
-      <span>114 字</span>
-    
-  </div>
+<div class="card card-content">
+  <h1 class="widget-title">归档</h1>
+</div>
+<div class="archive-timeline">
   
-    <div 
-      class="post-meta post-show-meta" 
-      style="margin-top: -10px;">
-      <div style="display: flex; align-items: center;">
-        <i 
-          class="iconfont icon-biaoqian" 
-          style="margin-right: 2px; font-size: 1.15rem;">
-        </i>
-        
-          
-          <a 
-            href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" 
-            class="post-meta-link">
-            机器学习方法
-          </a>
-        
-      </div>
-    </div>
   
-  </header>
-  <div 
-    id="section" 
-    class="post-content">
-    <h1 id="Hidden-Markov-Model-HMM"><a href="#Hidden-Markov-Model-HMM" class="headerlink" title="Hidden Markov Model (HMM)"></a>Hidden Markov Model (HMM)</h1><h2 id="0-背景"><a href="#0-背景" class="headerlink" title="0. 背景"></a>0. 背景</h2><p>隐变量服从一个离散的概率分布。<br>可以看做一个动态模型（Dynamic Model）&#x3D; 概率图 + 时间。<br>HMM &#x3D; 马尔可夫链 + 一般随机过程</p>
-<h2 id="1-符号定义"><a href="#1-符号定义" class="headerlink" title="1. 符号定义"></a>1. 符号定义</h2><ol>
-<li>模型 $\lambda&#x3D;(\pi,A,B)$：<ul>
-<li>$\pi$ 为初始概率分布</li>
-<li>$A$ 状态转移矩阵</li>
-<li>$B$ 观测状态生成矩阵</li>
-</ul>
-</li>
-<li>状态序列 $I&#x3D;{ i_1, i_2,…, i_T}$, 其中每个状态的取值集合为 $Q&#x3D;{q_1, q_2, …, q_N}$</li>
-</ol>
-
-  </div>
-  <div>
     
-      <div 
-        class="post-note note-warning copyright" 
-        style="margin-top: 42px">
-        <p>
-          <span style="font-weight: bold;">作者：</span><a 
-            target="_blank" 
-            rel="nofollow noopener noreferrer" 
-            href="/about">
-            hfang
-          </a>
-        </p>
-        <p>
-          <span style="font-weight: bold;">文章链接：</span><a 
-            target="_blank" 
-            rel="nofollow noopener noreferrer" 
-            href="https://hforward.github.io/2022/12/30/HiddenMarkovModel/">
-            https://hforward.github.io/2022/12/30/HiddenMarkovModel/
-          </a>
-        </p>
-        <p><span style="font-weight: bold;">版权声明：</span>本博客所有文章除特别声明外，均采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0 协议</a>。转载请注明出处！</p>
-      </div>
+      <div class="archive-timeline-tag"><span>2023</span></div>
+      
     
-  </div>
-</article>
-<div class="nav">
-  
-    <div class="nav-item-prev">
-      <a 
-        href="/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">二维几何变换 </div>
-          
+    <div class="archive-timeline-item">
+      <div class="archive-timeline-post">
+        <div class="card card-content">
+          <div class="archive-timeline-post-date">2023-04-07</div>
+          <div class="archive-timeline-post-content">
+            <a 
+              href="/2023/04/07/%E4%BA%8C%E7%BB%B4%E5%87%A0%E4%BD%95%E5%8F%98%E6%8D%A2/"
+              class="archive-timeline-post-item">
+              二维几何变换
+            </a>
+          </div>
         </div>
-      </a>
-    </div>
-  
-  
-    <div class="nav-item-next">
-      <a 
-        href="/2022/12/28/MonteCarlo/" 
-        class="nav-link">
-        <div>
-          <div class="nav-label">下一篇</div>
-          
-            <div class="nav-title">Markov Chain &amp; Monte Carlo (MCMC) </div>
-          
-        </div>
-        <i class="iconfont icon-right nav-next-icon"></i>
-      </a>
+      </div>
     </div>
   
 </div>
 
-<div 
-  class="card card-content toc-card" 
-  id="mobiletoc">
-  <div class="toc-header">
-  <i 
-    class="iconfont icon-menu" 
-    style="padding-right: 2px;">
-  </i>目录
-</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
-</div>
             </main>
             <aside class="right-column">
               <div class="sticky-widescreen">
   
-  
-    <article class="card card-content toc-card">
-      <div class="toc-header">
-  <i 
-    class="iconfont icon-menu" 
-    style="padding-right: 2px;">
-  </i>目录
-</div>
-<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hidden-Markov-Model-HMM"><span class="toc-text">Hidden Markov Model (HMM)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E8%83%8C%E6%99%AF"><span class="toc-text">0. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%AC%A6%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 符号定义</span></a></li></ol></li></ol>
-    </article>
   
   
   <article class="card card-content">
@@ -545,6 +453,57 @@
 </div>
   </article>
   
+  
+    <article class="card card-content">
+      <div class="archive-card">
+  <div class="archive-card-header">
+    <i 
+      class="iconfont icon-wodebaobiao" 
+      style="padding-right: 2px;">
+    </i>归档
+  </div>
+  <div class="archive-card-list">
+    
+    
+    
+      
+        
+        
+        
+      
+    
+      
+        
+          <a 
+            href="/archives/2023" 
+            class="archive-card-list-item">
+            2023
+            <span class="archive-card-list-item-badge">1</span>
+          </a>
+        
+        
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    
+      <a 
+        href="/archives/2022" 
+        class="archive-card-list-item">
+        2022
+        <span class="archive-card-list-item-badge">3</span>
+      </a>
+    
+  </div>
+</div>
+    </article>
   
 </div>
             </aside>
@@ -648,52 +607,8 @@
      
      
       
-
-  
-  
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        }
-      };
-    </script>
-    
-<script src="//cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-svg.js"></script>
-
-  
  
      
-     
-      <script>
-  var addImgLayout = function () {
-    var img = document.querySelectorAll('.post-content img')
-    var i
-    for (i = 0; i < img.length; i++) {
-      var wrapper = document.createElement('a')
-      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
-      wrapper.setAttribute('aria-label', 'illustration')
-      wrapper.style.cssText =
-        'width: 100%; display: flex; justify-content: center;'
-      if (img[i].alt) wrapper.dataset.caption = img[i].alt
-      wrapper.dataset.nolink = true
-      img[i].before(wrapper)
-      wrapper.append(img[i])
-      var divWrap = document.createElement('div')
-      divWrap.classList.add('gallery')
-      wrapper.before(divWrap)
-      divWrap.append(wrapper)
-    }
-    baguetteBox.run('.gallery')
-  }
-</script>
-<script>
-  loadScript(
-    "/js/lib/lightbox/baguetteBox.min.js",
-    addImgLayout
-  )
-</script>
- 
      
      
     <script src="/js/main.js"></script> 
